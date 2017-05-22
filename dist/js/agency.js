@@ -118,35 +118,41 @@ var loadArtists1 = function() {
     }).eachPage(function page(records, fetchNextPage) {
         records.forEach(function(record) {
             console.log('Retrieved ', record.get('magencyname'));
+            var linkproject = record.get('projects');
+            var linkprojectvalue = linkproject.length;
+            var linkcommitment = record.get('commitments');
+            var linkcommitmentvalue = linkcommitment.length;
+        //    base('projects').find(linkproject, function(err, projectrecord) {
+         //       if (err) { console.error(err); return; }
 
-            var $row = $('#row');
-            var html ='<div class="col-md-4"><div class="box box-solid"><div class="box-header with-border  text-center"><h3 class="box-title">' + record.get('magencyname') + '</h3></div><div class="box-body" id="tblData"><dl class="dl-horizontal">';
-            html += "<dt>Agency Acronym</dt>"+"<dd>" + record.get('magencyacro') + "</dd>";
-            html += "<dt># Project</dt>"+"<dd>" + record.get('projects') +"</dd>";
-            html += "<dt>- Total Cost</dt>"+"<dd>" + record.get('Total Project Cost') + "</dd>";
-            html += "<dt># Commitments</dt>"+"<dd>" + record.get('commitments') +"</dd>";
-            html += "<dt>- City Costs</dt>"+"<dd>" + record.get('Commitments Cost') + "</dd>";
-            html += "<dt>- Non City Costs </dt>"+"<dd>" + record.get('Commitments NonCity Cost') + "</dd>";
+         //       $.each(linkcommitment, function(index, value) {
+          //          base('commitments').find(value, function(err, commitmentrecord) {
+                      // if (err) { console.error(err); return; }
 
-            // $row.append($('<dd>').text(record.get('magencyacro')));
-            // $row.append($('<dd>').text(record.get('Total Project Cost')));
-            // $row.append($('<dd>').text(record.get('commitments')));
-            // $row.append($('<dd>').text(record.get('Commitments Cost')));
-            // $row.append($('<dd>').text(record.get('Commitments NonCity Cost')));
-            html += "</dl></div></div></div></div>"
-
-            $row.append(html);
+                        var $row = $('#row');
+                        var html ='<div class="col-md-4"><div class="box box-solid"><div class="box-header with-border  text-center"><h3 class="box-title">' + record.get('magencyname') + '</h3></div><div class="box-body" id="tblData"><dl class="dl-horizontal">';
+                        html += "<dt>Agency Acronym</dt>"+"<dd>" + record.get('magencyacro') + "</dd>";
+                        html += "<dt># Projects</dt>"+"<dd>" + linkprojectvalue +"</dd>";
+                        html += "<dt>- Total Cost</dt>"+"<dd>" + record.get('Total Project Cost') + "</dd>";
+                        html += "<dt># Commitments</dt>"+"<dd>" + linkcommitmentvalue +"</dd>";
+                        html += "<dt>- City Costs</dt>"+"<dd>" + '$' + record.get('Commitments Cost') + "</dd>";
+                        html += "<dt>- Non City Costs </dt>"+"<dd>" +'$'+ record.get('Commitments NonCity Cost') + "</dd>";
+                        html += "</dl></div></div></div></div>"
+                        $row.append(html);
+                     //   });
+              //  });
+            });
 
             // $('#tblData').append($row);
-        });
+     //   });
       
          
             fetchNextPage();
         
     }, function done(error) {
         console.log(error);
-    });
-    base('agency').select({
+ });
+    /*base('agency').select({
          sort: [
             {field: 'magency', direction: 'asc'}
         ],
@@ -177,9 +183,16 @@ var loadArtists1 = function() {
 
     }, function done(error) {
         console.log(error);
-    });
+    });*/
 };
 loadArtists1();
+
+
+
+
+
+
+
 
 
 
